@@ -1,17 +1,7 @@
 from django.forms import ModelForm
-from .models import Publisher, Author, Book
+from .models import Product
 
-class PublisherForm(ModelForm):
+class ProductForm(ModelForm):
    class Meta:
-       model = Publisher
-       fields = '__all__'
-
-class AuthorForm(ModelForm):
-   class Meta:
-       model = Author
-       fields = '__all__'
-
-class BookForm(ModelForm):
-   class Meta:
-       model = Book
+       model = Product
        fields = '__all__'

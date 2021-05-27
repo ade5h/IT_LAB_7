@@ -1,49 +1,20 @@
 from django.shortcuts import render
-from .models import Publisher, Author, Book
-from .forms import PublisherForm, AuthorForm, BookForm
+from .models import Product
+from .forms import ProductForm
 
-def insert_publisher(request):
-
+def insert(request):
    if (request.method == 'POST'):
-       form = PublisherForm(request.POST)
-
-       if (form.is_valid):
-           form.save()
-
-   else:
-       form = PublisherForm()
-  
-   context = {'form': form, 'type': 'Publisher'}
-   return render(request, 'insert.html', context)
-
-def insert_author(request):
-   if (request.method == 'POST'):
-       form = AuthorForm(request.POST)
+       form = ProductForm(request.POST)
        if (form.is_valid):
            form.save()
    else:
-       form = AuthorForm()
+       form = ProductForm()
   
-   context = {'form': form, 'type': 'Author'}
-   return render(request, 'insert.html', context)
-
-def insert_book(request):
-   if (request.method == 'POST'):
-       form = BookForm(request.POST)
-       if (form.is_valid):
-           form.save()
-   else:
-       form = BookForm()
-  
-   context = {'form': form, 'type': 'Book'}
+   context = {'form': form}
    return render(request, 'insert.html', context)
 
 def list(request):
+   products = Product.objects.all()
 
-   publishers = Publisher.objects.all()
-   authors = Author.objects.all()
-   books = Book.objects.all()
-
-   context = {'publishers': publishers, 'authors': authors, 'books': books}
-
+   context = {'products': products}
    return render(request, 'list.html', context)
