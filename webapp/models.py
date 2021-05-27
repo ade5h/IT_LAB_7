@@ -1,20 +1,20 @@
-from __future__ import unicode_literals
-
 from django.db import models
+from django.db.models.fields import CharField, IntegerField
 
-class Category(models.Model):
-   name = models.CharField(max_length=100, unique=True)
-   visits = models.IntegerField(default=0)
-   likes = models.IntegerField(default=0)
+
+class Lives(models.Model):
+   person_name = CharField(max_length=100)
+   street = CharField(max_length=100)
+   city = CharField(max_length=100)
 
    def __str__(self):
-       return self.name
+       return str(self.person_name)
 
-class Page(models.Model):
-   category = models.ForeignKey(Category, on_delete=models.CASCADE)
-   title = models.CharField(max_length=100)
-   url = models.CharField(max_length=100)
-   views = models.IntegerField(default=0)
-  
+
+class Works(models.Model):
+   person_name = models.ForeignKey(Lives, on_delete=models.CASCADE)
+   company_name = CharField(max_length=100)
+   salary = IntegerField()
+
    def __str__(self):
-       return self.title
+       return str(self.person_name)

@@ -1,37 +1,31 @@
-from typing import List
 from django.shortcuts import render
-from .models import Category, Page
-from .forms import CategoryForm, PageForm
+from .models import Lives, Works
+from .forms import WorksForm
 
-def insert_category(request):
-   if request.method == 'POST':
-       form = CategoryForm(request.POST)
+def insert_works(request):
 
-       if (form.is_valid):
-           form.save()
-   else:
-       form = CategoryForm()
-
-   context = {'form': form}
-   return render(request, 'insert.html', context)
-
-def insert_page(request):
-   if request.method == 'POST':
-       form = PageForm(request.POST)
+   if (request.method == 'POST'):
+       form = WorksForm(request.POST)
 
        if (form.is_valid):
            form.save()
-   else:
-       form = PageForm()
 
+   else:
+       form = WorksForm()
+  
    context = {'form': form}
    return render(request, 'insert.html', context)
 
+def query(request):
 
-def list_view(request):
-   categories = Category.objects.all()
-   pages = Page.objects.all()
+   if (request.method == 'GET'):
 
-   context = {'categories': categories, 'pages': pages}
+       company_name = request.GET.get('company_name')
 
-   return render(request, 'list.html', context)
+       people = Works.objects.filter(company_name=company_name)
+       context = {'people': people}
+      
+   else:
+       context = {}
+
+   return render(request, 'query.html', context)

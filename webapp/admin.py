@@ -1,9 +1,5 @@
-from __future__ import unicode_literals
-
 from django.contrib import admin
+from .models import Lives, Works
 
-# Register your models here.
-from .models import Category, Page
-
-admin.site.register(Category)
-admin.site.register(Page)
+admin.site.register(Lives)
+admin.site.register(Works)
