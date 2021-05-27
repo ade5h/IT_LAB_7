@@ -1,31 +1,49 @@
 from django.shortcuts import render
-from .models import Lives, Works
-from .forms import WorksForm
+from .models import Publisher, Author, Book
+from .forms import PublisherForm, AuthorForm, BookForm
 
-def insert_works(request):
+def insert_publisher(request):
 
    if (request.method == 'POST'):
-       form = WorksForm(request.POST)
+       form = PublisherForm(request.POST)
 
        if (form.is_valid):
            form.save()
 
    else:
-       form = WorksForm()
+       form = PublisherForm()
   
-   context = {'form': form}
+   context = {'form': form, 'type': 'Publisher'}
    return render(request, 'insert.html', context)
 
-def query(request):
-
-   if (request.method == 'GET'):
-
-       company_name = request.GET.get('company_name')
-
-       people = Works.objects.filter(company_name=company_name)
-       context = {'people': people}
-      
+def insert_author(request):
+   if (request.method == 'POST'):
+       form = AuthorForm(request.POST)
+       if (form.is_valid):
+           form.save()
    else:
-       context = {}
+       form = AuthorForm()
+  
+   context = {'form': form, 'type': 'Author'}
+   return render(request, 'insert.html', context)
 
-   return render(request, 'query.html', context)
+def insert_book(request):
+   if (request.method == 'POST'):
+       form = BookForm(request.POST)
+       if (form.is_valid):
+           form.save()
+   else:
+       form = BookForm()
+  
+   context = {'form': form, 'type': 'Book'}
+   return render(request, 'insert.html', context)
+
+def list(request):
+
+   publishers = Publisher.objects.all()
+   authors = Author.objects.all()
+   books = Book.objects.all()
+
+   context = {'publishers': publishers, 'authors': authors, 'books': books}
+
+   return render(request, 'list.html', context)

@@ -1,5 +1,5 @@
-{% extends "base.html" %} {% block content %}
-<h2>Insert into Works Table</h2>
+{% block content %}
+<h2>Insert {{type}}</h2>
 <form action="" method="POST">
 	{% csrf_token %} {{ form.as_p }}
 	<input type="submit" value="Insert" />
