@@ -1,11 +1,10 @@
 from django.db import models
-from django.db.models.fields import CharField, DateField, IntegerField, TextField
-from django.forms.widgets import Textarea
+from django.db.models.fields import CharField, FloatField, IntegerField
 
-class Product(models.Model):
-   title = CharField(max_length=100)
-   price = IntegerField()
-   description = TextField()
+class Student(models.Model):
+   regnum = IntegerField()
+   name = CharField(max_length=100)
+   cgpa = FloatField()
 
    def __str__(self):
-       return str(self.title)
+       return str(self.name)

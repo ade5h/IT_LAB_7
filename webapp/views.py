@@ -1,20 +1,18 @@
-from django.shortcuts import render
-from .models import Product
-from .forms import ProductForm
+from django.shortcuts import render, redirect
+from .models import Student
 
-def insert(request):
-   if (request.method == 'POST'):
-       form = ProductForm(request.POST)
-       if (form.is_valid):
-           form.save()
-   else:
-       form = ProductForm()
-  
-   context = {'form': form}
-   return render(request, 'insert.html', context)
+def search(request):
+	print(request.GET.id)
+	redirect('allStudents/'+id)
+		
 
-def list(request):
-   products = Product.objects.all()
+def getStudent(request, id):
+	student = Student.objects.get(regnum=id)
+	context = {'student': student}
+	return render(request, 'getStudent.html', context)
 
-   context = {'products': products}
-   return render(request, 'list.html', context)
+def allStudents(request):
+   students = Student.objects.all()
+
+   context = {'students': students}
+   return render(request, 'allStudents.html', context)

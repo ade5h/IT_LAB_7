@@ -1,7 +1,10 @@
-from django.conf.urls import url
-from . import views
+from django.urls import path
+from .views import *
 
 urlpatterns = [
-   url('insert', views.insert, name='insert'),
-   url('list', views.list, name='list'),
+   path('allStudents', allStudents, name='allStudents'),
+   path('allStudents/<int:id>', getStudent, name='getStudent'),
+	 path('search', search, name='search')
 ]
+
+ 
